@@ -21,3 +21,4 @@ class Bear : public NPC, public FightVisitor {
 
 
 
+

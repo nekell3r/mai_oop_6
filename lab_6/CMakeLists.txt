@@ -56,3 +56,4 @@ install(TARGETS lab6_main DESTINATION bin)
 
 
 
+

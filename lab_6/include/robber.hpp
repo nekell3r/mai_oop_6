@@ -21,3 +21,4 @@ class Robber : public NPC, public FightVisitor {
 
 
 
+

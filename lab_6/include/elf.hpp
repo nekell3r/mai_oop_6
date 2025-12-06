@@ -21,3 +21,4 @@ class Elf : public NPC, public FightVisitor {
 
 
 
+
