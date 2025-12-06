@@ -102,3 +102,5 @@ TEST(NPCTest, FightRulesRobberDoesNotKillElf) {
   EXPECT_FALSE(robber->Fight(elf));
 }
 
+
+

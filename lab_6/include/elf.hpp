@@ -19,3 +19,5 @@ class Elf : public NPC, public FightVisitor {
   bool Visit(std::shared_ptr<Robber> defender) override;
 };
 
+
+

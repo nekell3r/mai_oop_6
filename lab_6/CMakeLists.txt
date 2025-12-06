@@ -54,3 +54,5 @@ gtest_discover_tests(lab6_tests)
 
 install(TARGETS lab6_main DESTINATION bin)
 
+
+

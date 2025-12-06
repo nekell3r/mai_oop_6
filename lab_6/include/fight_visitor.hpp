@@ -15,3 +15,5 @@ class FightVisitor {
   virtual bool Visit(std::shared_ptr<Robber> defender) = 0;
 };
 
+
+

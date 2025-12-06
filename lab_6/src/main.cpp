@@ -3,6 +3,7 @@
 #include <memory>
 #include <set>
 #include <random>
+#include <utility>
 
 #include "npc.hpp"
 #include "bear.hpp"
@@ -10,19 +11,41 @@
 #include "robber.hpp"
 #include "npc_factory.hpp"
 #include "observer.hpp"
+#include "fight_visitor.hpp"
 
 std::vector<std::shared_ptr<NPC>> Fight(
     const std::vector<std::shared_ptr<NPC>>& npcs,
     size_t distance) {
   std::set<std::shared_ptr<NPC>> dead_list;
+  std::set<std::pair<std::shared_ptr<NPC>, std::shared_ptr<NPC>>> processed_pairs;
 
   for (const auto& attacker : npcs) {
     for (const auto& defender : npcs) {
-      if (attacker != defender && attacker->IsClose(defender, distance)) {
-        auto visitor = std::dynamic_pointer_cast<FightVisitor>(attacker);
-        if (visitor && defender->Accept(visitor)) {
+      if (attacker == defender) continue;
+      
+      // Avoid processing the same pair twice
+      auto pair1 = std::make_pair(attacker, defender);
+      auto pair2 = std::make_pair(defender, attacker);
+      if (processed_pairs.find(pair1) != processed_pairs.end() ||
+          processed_pairs.find(pair2) != processed_pairs.end()) {
+        continue;
+      }
+      
+      if (attacker->IsClose(defender, distance)) {
+        processed_pairs.insert(pair1);
+        
+        // Check if attacker can kill defender
+        auto attacker_visitor = std::dynamic_pointer_cast<FightVisitor>(attacker);
+        if (attacker_visitor && defender->Accept(attacker_visitor)) {
           attacker->FightNotify(attacker, defender, true);
           dead_list.insert(defender);
+        }
+        
+        // Check if defender can kill attacker
+        auto defender_visitor = std::dynamic_pointer_cast<FightVisitor>(defender);
+        if (defender_visitor && attacker->Accept(defender_visitor)) {
+          defender->FightNotify(defender, attacker, true);
+          dead_list.insert(attacker);
         }
       }
     }

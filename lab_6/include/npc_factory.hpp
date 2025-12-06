@@ -21,3 +21,5 @@ class NpcFactory {
   static std::vector<std::shared_ptr<NPC>> LoadFromFile(const std::string& filename);
 };
 
+
+

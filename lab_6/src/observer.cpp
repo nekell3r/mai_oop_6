@@ -47,3 +47,5 @@ void FileObserver::OnFight(const std::shared_ptr<NPC>& attacker,
   }
 }
 
+
+
