@@ -3,6 +3,7 @@
 #include "bear.hpp"
 #include "elf.hpp"
 #include "robber.hpp"
+#include "fight_visitor.hpp"
 
 TEST(NPCTest, BearCreation) {
   Bear bear("Winnie", 100, 100);
@@ -43,63 +44,81 @@ TEST(NPCTest, FightRulesBearKillsElf) {
   auto bear = std::make_shared<Bear>("Bear1", 0, 0);
   auto elf = std::make_shared<Elf>("Elf1", 0, 0);
 
-  EXPECT_TRUE(bear->Fight(elf));
+  auto visitor = std::dynamic_pointer_cast<FightVisitor>(bear);
+  ASSERT_NE(visitor, nullptr);
+  EXPECT_TRUE(elf->Accept(visitor));
 }
 
 TEST(NPCTest, FightRulesBearDoesNotKillBear) {
   auto bear1 = std::make_shared<Bear>("Bear1", 0, 0);
   auto bear2 = std::make_shared<Bear>("Bear2", 0, 0);
 
-  EXPECT_FALSE(bear1->Fight(bear2));
+  auto visitor = std::dynamic_pointer_cast<FightVisitor>(bear1);
+  ASSERT_NE(visitor, nullptr);
+  EXPECT_FALSE(bear2->Accept(visitor));
 }
 
 TEST(NPCTest, FightRulesBearDoesNotKillRobber) {
   auto bear = std::make_shared<Bear>("Bear1", 0, 0);
   auto robber = std::make_shared<Robber>("Robber1", 0, 0);
 
-  EXPECT_FALSE(bear->Fight(robber));
+  auto visitor = std::dynamic_pointer_cast<FightVisitor>(bear);
+  ASSERT_NE(visitor, nullptr);
+  EXPECT_FALSE(robber->Accept(visitor));
 }
 
 TEST(NPCTest, FightRulesElfKillsRobber) {
   auto elf = std::make_shared<Elf>("Elf1", 0, 0);
   auto robber = std::make_shared<Robber>("Robber1", 0, 0);
 
-  EXPECT_TRUE(elf->Fight(robber));
+  auto visitor = std::dynamic_pointer_cast<FightVisitor>(elf);
+  ASSERT_NE(visitor, nullptr);
+  EXPECT_TRUE(robber->Accept(visitor));
 }
 
 TEST(NPCTest, FightRulesElfDoesNotKillBear) {
   auto elf = std::make_shared<Elf>("Elf1", 0, 0);
   auto bear = std::make_shared<Bear>("Bear1", 0, 0);
 
-  EXPECT_FALSE(elf->Fight(bear));
+  auto visitor = std::dynamic_pointer_cast<FightVisitor>(elf);
+  ASSERT_NE(visitor, nullptr);
+  EXPECT_FALSE(bear->Accept(visitor));
 }
 
 TEST(NPCTest, FightRulesElfDoesNotKillElf) {
   auto elf1 = std::make_shared<Elf>("Elf1", 0, 0);
   auto elf2 = std::make_shared<Elf>("Elf2", 0, 0);
 
-  EXPECT_FALSE(elf1->Fight(elf2));
+  auto visitor = std::dynamic_pointer_cast<FightVisitor>(elf1);
+  ASSERT_NE(visitor, nullptr);
+  EXPECT_FALSE(elf2->Accept(visitor));
 }
 
 TEST(NPCTest, FightRulesRobberKillsRobber) {
   auto robber1 = std::make_shared<Robber>("Robber1", 0, 0);
   auto robber2 = std::make_shared<Robber>("Robber2", 0, 0);
 
-  EXPECT_TRUE(robber1->Fight(robber2));
+  auto visitor = std::dynamic_pointer_cast<FightVisitor>(robber1);
+  ASSERT_NE(visitor, nullptr);
+  EXPECT_TRUE(robber2->Accept(visitor));
 }
 
 TEST(NPCTest, FightRulesRobberDoesNotKillBear) {
   auto robber = std::make_shared<Robber>("Robber1", 0, 0);
   auto bear = std::make_shared<Bear>("Bear1", 0, 0);
 
-  EXPECT_FALSE(robber->Fight(bear));
+  auto visitor = std::dynamic_pointer_cast<FightVisitor>(robber);
+  ASSERT_NE(visitor, nullptr);
+  EXPECT_FALSE(bear->Accept(visitor));
 }
 
 TEST(NPCTest, FightRulesRobberDoesNotKillElf) {
   auto robber = std::make_shared<Robber>("Robber1", 0, 0);
   auto elf = std::make_shared<Elf>("Elf1", 0, 0);
 
-  EXPECT_FALSE(robber->Fight(elf));
+  auto visitor = std::dynamic_pointer_cast<FightVisitor>(robber);
+  ASSERT_NE(visitor, nullptr);
+  EXPECT_FALSE(elf->Accept(visitor));
 }
 
 

@@ -9,29 +9,17 @@ bool Bear::Accept(std::shared_ptr<FightVisitor> visitor) {
   return visitor->Visit(std::dynamic_pointer_cast<Bear>(shared_from_this()));
 }
 
+// Visitor implementation for Bear - contains fight logic
 // Bear kills Elves
-bool Bear::Fight(std::shared_ptr<Bear>) {
-  return false;
+bool Bear::Visit(std::shared_ptr<Bear> /*defender*/) {
+  return false;  // Bear cannot kill Bear
 }
 
-bool Bear::Fight(std::shared_ptr<Elf>) {
-  return true;
+bool Bear::Visit(std::shared_ptr<Elf> /*defender*/) {
+  return true;  // Bear kills Elf
 }
 
-bool Bear::Fight(std::shared_ptr<Robber>) {
-  return false;
-}
-
-// Visitor implementation for Bear
-bool Bear::Visit(std::shared_ptr<Bear> defender) {
-  return Fight(defender);
-}
-
-bool Bear::Visit(std::shared_ptr<Elf> defender) {
-  return Fight(defender);
-}
-
-bool Bear::Visit(std::shared_ptr<Robber> defender) {
-  return Fight(defender);
+bool Bear::Visit(std::shared_ptr<Robber> /*defender*/) {
+  return false;  // Bear cannot kill Robber
 }
 
