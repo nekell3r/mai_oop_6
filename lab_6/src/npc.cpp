@@ -1,5 +1,8 @@
 #include "npc.hpp"
+
 #include "observer.hpp"
+
+namespace lab6 {
 
 NPC::NPC(NpcType type, const std::string& name, int x, int y)
     : name_(name), x_(x), y_(y), type_(type) {}
@@ -36,3 +39,4 @@ std::ostream& operator<<(std::ostream& os, const NPC& npc) {
   return os;
 }
 
+}  // namespace lab6

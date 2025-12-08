@@ -2,6 +2,8 @@
 #include "bear.hpp"
 #include "elf.hpp"
 
+namespace lab6 {
+
 Robber::Robber(const std::string& name, int x, int y)
     : NPC(NpcType::Robber, name, x, y) {}
 
@@ -22,4 +24,6 @@ bool Robber::Visit(std::shared_ptr<Elf> /*defender*/) {
 bool Robber::Visit(std::shared_ptr<Robber> /*defender*/) {
   return true;  // Robber kills Robber
 }
+
+}  // namespace lab6
 

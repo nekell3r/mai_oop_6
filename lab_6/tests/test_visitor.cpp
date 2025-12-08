@@ -4,6 +4,11 @@
 #include "elf.hpp"
 #include "robber.hpp"
 
+using lab6::Bear;
+using lab6::Elf;
+using lab6::FightVisitor;
+using lab6::Robber;
+
 TEST(VisitorTest, BearVisitsElf) {
   auto bear = std::make_shared<Bear>("Bear1", 0, 0);
   auto elf = std::make_shared<Elf>("Elf1", 0, 0);

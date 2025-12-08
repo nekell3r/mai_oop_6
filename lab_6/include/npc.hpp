@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 
+namespace lab6 {
+
 // Forward declarations
 class Bear;
 class Elf;
@@ -32,8 +34,8 @@ class NPC : public std::enable_shared_from_this<NPC> {
   virtual ~NPC() = default;
 
   void Subscribe(std::shared_ptr<IFightObserver> observer);
-  void FightNotify(const std::shared_ptr<NPC>& attacker, 
-                   const std::shared_ptr<NPC>& defender, 
+  void FightNotify(const std::shared_ptr<NPC>& attacker,
+                   const std::shared_ptr<NPC>& defender,
                    bool win);
 
   bool IsClose(const std::shared_ptr<NPC>& other, size_t distance) const;
@@ -51,6 +53,4 @@ class NPC : public std::enable_shared_from_this<NPC> {
   friend std::ostream& operator<<(std::ostream& os, const NPC& npc);
 };
 
-
-
-
+}  // namespace lab6

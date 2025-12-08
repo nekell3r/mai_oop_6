@@ -1,8 +1,10 @@
 #pragma once
 
-#include <memory>
 #include <fstream>
-#include <iostream>
+#include <memory>
+#include <string>
+
+namespace lab6 {
 
 class NPC;
 
@@ -34,9 +36,4 @@ class FileObserver : public IFightObserver {
                bool win) override;
 };
 
-
-
-
-
-
-
+}  // namespace lab6

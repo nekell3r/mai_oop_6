@@ -7,6 +7,8 @@
 #include "elf.hpp"
 #include "robber.hpp"
 
+namespace lab6 {
+
 std::shared_ptr<NPC> NpcFactory::CreateNPC(NpcType type,
                                             const std::string& name,
                                             int x,
@@ -22,9 +24,10 @@ std::shared_ptr<NPC> NpcFactory::CreateNPC(NpcType type,
       return std::make_shared<Elf>(name, x, y);
     case NpcType::Robber:
       return std::make_shared<Robber>(name, x, y);
-    default:
-      throw std::invalid_argument("Unknown NPC type");
+    case NpcType::Unknown:
+      break;
   }
+  throw std::invalid_argument("Unknown NPC type");
 }
 
 std::shared_ptr<NPC> NpcFactory::CreateNPC(std::istream& is) {
@@ -78,6 +81,7 @@ std::vector<std::shared_ptr<NPC>> NpcFactory::LoadFromFile(
   return result;
 }
 
+}  // namespace lab6
 
 
 

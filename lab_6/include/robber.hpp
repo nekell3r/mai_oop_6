@@ -1,7 +1,9 @@
 #pragma once
 
-#include "npc.hpp"
 #include "fight_visitor.hpp"
+#include "npc.hpp"
+
+namespace lab6 {
 
 class Robber : public NPC, public FightVisitor {
  public:
@@ -15,6 +17,4 @@ class Robber : public NPC, public FightVisitor {
   bool Visit(std::shared_ptr<Robber> /*defender*/) override;
 };
 
-
-
-
+}  // namespace lab6

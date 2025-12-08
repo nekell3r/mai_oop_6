@@ -2,8 +2,15 @@
 
 #include "bear.hpp"
 #include "elf.hpp"
-#include "robber.hpp"
 #include "fight_visitor.hpp"
+#include "robber.hpp"
+
+using lab6::Bear;
+using lab6::Elf;
+using lab6::FightVisitor;
+using lab6::NPC;
+using lab6::NpcType;
+using lab6::Robber;
 
 TEST(NPCTest, BearCreation) {
   Bear bear("Winnie", 100, 100);

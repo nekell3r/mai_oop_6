@@ -8,6 +8,13 @@
 #include "npc_factory.hpp"
 #include "robber.hpp"
 
+using lab6::Bear;
+using lab6::Elf;
+using lab6::NPC;
+using lab6::NpcFactory;
+using lab6::NpcType;
+using lab6::Robber;
+
 TEST(FactoryTest, CreateBear) {
   auto npc = NpcFactory::CreateNPC(NpcType::Bear, "TestBear", 100, 100);
   
